@@ -10,12 +10,13 @@ I2Coms::I2Coms(byte address)
     _I2CAddress = address;
 }
 /// @brief Write data to register throught I2C
-/// @param address aka "where" 
+/// @param address aka "where"
 /// @param value aka "what"
-void I2Coms::WriteToRegister(byte address, byte value){
+void I2Coms::writeToRegister(byte address, byte value)
+{
     Wire.beginTransmission(_I2CAddress);
-    Wire.write(address);    //where
-    Wire.write(value);      //what
+    Wire.write(address); // where
+    Wire.write(value);   // what
     Wire.endTransmission();
     return;
 }
@@ -23,7 +24,8 @@ void I2Coms::WriteToRegister(byte address, byte value){
 /// @param address starting address of data read
 /// @param noBytes amount of data to read
 /// @param _buffer place where data will be stored
-void I2Coms::ReadFromRegister(byte address, byte noBytes, byte _buffer[]){
+void I2Coms::readFromRegister(byte address, byte noBytes, byte _buffer[])
+{
     // Where to listen
     Wire.beginTransmission(_I2CAddress);
     Wire.write(address);
@@ -31,7 +33,7 @@ void I2Coms::ReadFromRegister(byte address, byte noBytes, byte _buffer[]){
 
     // Listen to data
     Wire.beginTransmission(_I2CAddress);
-    Wire.requestFrom(_I2CAddress,noBytes);
+    Wire.requestFrom(_I2CAddress, noBytes);
     int n = 0;
     while (Wire.available())
     {
