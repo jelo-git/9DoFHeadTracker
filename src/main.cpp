@@ -1,15 +1,15 @@
 #include <Arduino.h>
 
 #include <ADXL345.h>
-// def custom func here
 
 ADXL345 *adxl345;
 
 void setup()
 {
   // put your setup code here, to run once:
-  adxl345 = new ADXL345();
   Serial.begin(9600);
+  adxl345 = new ADXL345();
+  Serial.println("ADXL345 init");
 }
 
 void loop()
@@ -25,5 +25,3 @@ void loop()
   Serial.println(data[2]);
   delay(1000);
 }
-
-// custom func here

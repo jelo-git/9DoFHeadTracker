@@ -29,8 +29,8 @@ void I2Coms::readFromRegister(byte address, byte noBytes, byte _buffer[])
     // Where to listen
     Wire.beginTransmission(_I2CAddress);
     Wire.write(address);
-    Wire.endTransmission();
-
+    int out = Wire.endTransmission();
+    Serial.println(out);
     // Listen to data
     Wire.beginTransmission(_I2CAddress);
     Wire.requestFrom(_I2CAddress, noBytes);

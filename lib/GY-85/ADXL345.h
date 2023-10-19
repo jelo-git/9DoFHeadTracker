@@ -7,7 +7,7 @@ class ADXL345
 {
 private:
     I2Coms _I2Coms;
-    void readRawData(short int *_rawData);
+    void readRawData(int *_rawData);
 
 public:
     ADXL345();

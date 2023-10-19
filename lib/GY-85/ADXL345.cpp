@@ -18,26 +18,28 @@
 
 ADXL345::ADXL345() : _I2Coms(0x54)
 {
-    _I2Coms.writeToRegister(ADXL345_POWER_CTL, 0x08);
+    _I2Coms.writeToRegister(ADXL345_POWER_CTL, 0);
+    _I2Coms.writeToRegister(ADXL345_POWER_CTL, 16);
+    _I2Coms.writeToRegister(ADXL345_POWER_CTL, 8);
     _I2Coms.writeToRegister(ADXL345_DATA_FORMAT, ADXL345_G_RANGE_2);
 };
 
-void ADXL345::readRawData(short int *_rawData)
+void ADXL345::readRawData(int *_rawData)
 {
     byte _buffer[6];
     _I2Coms.readFromRegister(ADXL345_DATAX0, 6, _buffer);
-    _rawData[0] = (((short int)_buffer[1]) << 8) | _buffer[0];
-    _rawData[1] = (((short int)_buffer[3]) << 8) | _buffer[2];
-    _rawData[2] = (((short int)_buffer[5]) << 8) | _buffer[4];
+    _rawData[0] = (((int)_buffer[1]) << 8) | _buffer[0];
+    _rawData[1] = (((int)_buffer[3]) << 8) | _buffer[2];
+    _rawData[2] = (((int)_buffer[5]) << 8) | _buffer[4];
     return;
 }
 
 void ADXL345::readData(float *_data)
 {
-    short int _rawData[3];
+    int _rawData[3];
     readRawData(_rawData);
-    _data[0] = (float)_rawData[0] * (float)ADXL345_SCALE_FACTOR;
-    _data[1] = (float)_rawData[1] * (float)ADXL345_SCALE_FACTOR;
-    _data[2] = (float)_rawData[2] * (float)ADXL345_SCALE_FACTOR;
+    _data[0] = (float)_rawData[0] * (float)(4 / 1024);
+    _data[1] = (float)_rawData[1] * (float)(4 / 1024);
+    _data[2] = (float)_rawData[2] * (float)(4 / 1024);
     return;
 }
