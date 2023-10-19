@@ -15,8 +15,9 @@ I2Coms::I2Coms(byte address)
 void I2Coms::writeToRegister(byte address, byte value)
 {
     Wire.beginTransmission(_I2CAddress);
-    Wire.write(address); // where
-    Wire.write(value);   // what
+    Serial.println("beginTransmission");
+    Serial.println(Wire.write(address)); // where
+    Serial.println(Wire.write(value));   // what
     Wire.endTransmission();
     return;
 }
@@ -27,10 +28,10 @@ void I2Coms::writeToRegister(byte address, byte value)
 void I2Coms::readFromRegister(byte address, byte noBytes, byte _buffer[])
 {
     // Where to listen
+    Serial.println("readFromRegister");
     Wire.beginTransmission(_I2CAddress);
-    Wire.write(address);
-    int out = Wire.endTransmission();
-    Serial.println(out);
+    Serial.println(Wire.write(address));
+    Serial.println(Wire.endTransmission());
     // Listen to data
     Wire.beginTransmission(_I2CAddress);
     Wire.requestFrom(_I2CAddress, noBytes);
