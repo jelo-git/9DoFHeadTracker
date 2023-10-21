@@ -3,8 +3,8 @@
 void GY_85::init()
 {
     Wire.begin();
-    // startAccel();
-    // startGyro();
+    startAccel();
+    startGyro();
     startMag();
 }
 
