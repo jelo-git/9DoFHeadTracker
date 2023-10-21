@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "*.ejs": "html",
-        "STC-ADXL345.C": "cpp"
-    }
-}
