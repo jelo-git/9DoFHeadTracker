@@ -20,13 +20,12 @@ private:
     void startAccel();
     void startGyro();
     void startMag();
-
     void calibrateGyro();
     int gyroXoffset, gyroYoffset, gyroZoffset;
 
 public:
     void init();
-    void readAccel(float *x, float *y, float *z);
+    void readAccel(int *x, int *y, int *z);
     void readGyro(int *x, int *y, int *z);
     void readMag(int *x, int *y, int *z);
 };

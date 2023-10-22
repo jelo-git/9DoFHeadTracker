@@ -22,7 +22,7 @@ void GY_85::startAccel()
     Wire.write(8);    // Measurement mode
     Wire.endTransmission();
 }
-void GY_85::readAccel(float *x, float *y, float *z)
+void GY_85::readAccel(int *x, int *y, int *z)
 {
     // Read 6 bytes from the ADXL345
     // Each axis reading comes in 10 bit resolution, ie 2 bytes.  Least Significat Byte first!!
@@ -33,10 +33,9 @@ void GY_85::readAccel(float *x, float *y, float *z)
     Wire.requestFrom(ADXL345, 6);
     if (Wire.available() <= 6)
     {
-        // Read 6 bytes and multiply each reading by 4g*2/1024 to convert to units of g
-        *x = (Wire.read() | Wire.read() << 8) * ((float)8 / 1024); // x-axis
-        *y = (Wire.read() | Wire.read() << 8) * ((float)8 / 1024); // y-axis
-        *z = (Wire.read() | Wire.read() << 8) * ((float)8 / 1024); // z-axis
+        *x = Wire.read() | Wire.read() << 8; // x-axis
+        *y = Wire.read() | Wire.read() << 8; // y-axis
+        *z = Wire.read() | Wire.read() << 8; // z-axis
     }
 }
 
