@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>
+		<%= title %>
+	</title>
+</head>
+
+<body>
+	<h1>
+		<%= title %>
+	</h1>
+	<% let options=['Roll','Pitch','Yaw']; 
+	for(let i=0; i < options.length; i++) { %>
+	<div class="axis-card">
+		<div class="axis-card-left">
+			<div>
+				<h2>
+					<%= options[i] %>
+				</h2>
+				<span>
+					val
+				</span>
+			</div>
+			<input type="range" name="" id="">
+		</div>
+		<div class="axis-card-right">
+			<% for(let j=0; j < options.length; j++) { %>
+			<input type="radio" name="<%= options[i] %>" value="<%= options[j]%>" <% if (i==j) { %> <%= 'checked' %> <% } %>>
+			<% } %>
+		</div>
+	</div>
+	<% } %>
+</body>
+
+</html>
