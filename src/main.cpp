@@ -1,9 +1,10 @@
 #include <Arduino.h>
 #include "GY_85.h"
+
 // #include "filter.h"
 
 // #define WEIGHT 0.2
-#define ALPHA 0.2
+#define ALPHA 0.5
 
 GY_85 gy85;
 
@@ -46,10 +47,24 @@ void loop()
   double roll = (1 - ALPHA) * gxang + ALPHA * aroll;
   double pitch = (1 - ALPHA) * gyang + ALPHA * apitch;
   double yaw = (1 - ALPHA) * gzang + ALPHA * myaw;
-  Serial.print(roll);
-  Serial.print(" ");
-  Serial.print(pitch);
-  Serial.print(" ");
+  if (roll > 180)
+    roll -= 360;
+  if (roll < -180)
+    roll += 360;
+  if (pitch > 180)
+    pitch -= 360;
+  if (pitch < -180)
+    pitch += 360;
+  if (yaw > 180)
+    yaw -= 360;
+  if (yaw < -180)
+    yaw += 360;
+
+  Serial.print(">roll:");
+  Serial.println(roll);
+  Serial.print(">pitch:");
+  Serial.println(pitch);
+  Serial.print(">yaw:");
   Serial.println(yaw);
 
   // delay(10);
